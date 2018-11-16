@@ -6,7 +6,7 @@ image_config: &image_config
 
   IMAGE_NAME: ruby
 
-  IMAGE_TAG: 2.4.0
+  IMAGE_TAG: ruby-2.4.0-node
 
   # NOTE: if you're modifying this config.yml file manually
   # rather than using the included setup script,
@@ -17,7 +17,7 @@ image_config: &image_config
 
   RUBY_VERSION_NUM: 2.4.0
 
-  # NODE_VERSION_NUM: # pick a version from https://nodejs.org/dist
+  NODE_VERSION_NUM: 10.13.0
 
   # PYTHON_VERSION_NUM: # pick a version from https://python.org/ftp/python
 
@@ -54,7 +54,7 @@ jobs:
 
   test_image:
     docker:
-      - image: $DOCKER_USERNAME/ruby-2.4.0:2.4.0
+      - image: $DOCKER_USERNAME/ruby:ruby-2.4.0-node
         environment:
           <<: *image_config
 
@@ -85,6 +85,7 @@ workflows:
   dockerfile_wizard:
     jobs:
       - build
+
       - test_image:
           requires:
             - build
